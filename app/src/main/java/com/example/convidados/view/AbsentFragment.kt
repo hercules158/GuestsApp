@@ -9,15 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.convidados.constants.DataBaseConstants
-import com.example.convidados.databinding.FragmentPresentBinding
+import com.example.convidados.databinding.FragmentAbsentBinding
 import com.example.convidados.view.adapter.GuestsAdapter
 import com.example.convidados.view.listener.OnGuestListener
 import com.example.convidados.view.viewholder.GuestFormActivity
 import com.example.convidados.viewmodel.GuestsViewModel
 
-class PresentFragment : Fragment() {
 
-    private var _binding: FragmentPresentBinding? = null
+class AbsentFragment : Fragment() {
+
+    private var _binding: FragmentAbsentBinding? = null
 
     private lateinit var viewModel: GuestsViewModel
     private val adapter = GuestsAdapter() //Instanciando aqui para usar lá embaixo no adapter
@@ -25,8 +26,8 @@ class PresentFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, b: Bundle?): View {
-        viewModel = ViewModelProvider(this)[GuestsViewModel::class.java]
-        _binding = FragmentPresentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(GuestsViewModel::class.java)
+        _binding = FragmentAbsentBinding.inflate(inflater, container, false)
 
         // Os pacotes adapter e viewholder foram criador para fazer com que a RecyclerView funcione,
         // ela sempre precisa disso para conseguir ser usada.
@@ -49,7 +50,7 @@ class PresentFragment : Fragment() {
 
             override fun onDelete(id: Int) {
                 viewModel.delete(id)
-                viewModel.getPresent()
+                viewModel.getAbsent()
             }
         }
         adapter.attachListener(listener)
@@ -60,7 +61,7 @@ class PresentFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getPresent()
+        viewModel.getAbsent()
     }
 
     override fun onDestroyView() {

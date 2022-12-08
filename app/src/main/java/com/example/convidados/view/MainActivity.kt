@@ -12,9 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.convidados.R
 import com.example.convidados.databinding.ActivityMainBinding
-import com.example.convidados.model.GuestModel
-import com.example.convidados.repository.GuestRepository
-import com.example.convidados.viewmodel.GuestFormActivity
+import com.example.convidados.view.viewholder.GuestFormActivity
 
 class MainActivity : AppCompatActivity() {
 

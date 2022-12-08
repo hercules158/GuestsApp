@@ -77,7 +77,6 @@ class GuestRepository(context: Context) {
         }
     }
 
-
     fun getAll(): List<GuestModel> {
 
         val list = mutableListOf<GuestModel>()
@@ -122,6 +121,57 @@ class GuestRepository(context: Context) {
             return list
         }
         return list
+
+    }
+
+    fun get(id: Int): GuestModel? {
+
+        var guest: GuestModel? = null
+
+        try {
+
+            val db = guestDataBase.readableDatabase //Abre conexão com o banco no modo leitura
+
+            val projection = arrayOf(
+                DataBaseConstants.COLUMNS.ID,
+                DataBaseConstants.COLUMNS.NAME,
+                DataBaseConstants.COLUMNS.PRESENCE
+            )
+
+            val selection = DataBaseConstants.COLUMNS.ID + " = ?" //Crítério necessário
+            val args = arrayOf(id.toString())
+
+            //O cursor é como se fosse o cursor de um mouse que vai selecionando as linhas da tabela
+            val cursor = db.query(
+                DataBaseConstants.GUEST.TABLE_NAME,
+                projection,
+                selection,
+                args,
+                null,
+                null,
+                null,
+                null
+            )
+
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
+                    //Cursor.getInt é qual o tipo de dado estamos pegando, getColumnIndex irá retornar o
+                    // índice da coluna da tabela onde está a string informada.
+
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.COLUMNS.NAME))
+                    val presence =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.COLUMNS.PRESENCE))
+
+                    guest = GuestModel(id, name, presence == 1) //Aqui pegamoms o guest
+                }
+            }
+
+            cursor.close() //Precisamos fechar o cursor depois de utilizá-lo
+        } catch (e: Exception) {
+            return guest
+        }
+        return guest
 
     }
 

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Convidados"
         tools:targetApi="31">
         <activity
-            android:name=".viewmodel.GuestFormActivity"
+            android:name=".view.viewholder.GuestFormActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
