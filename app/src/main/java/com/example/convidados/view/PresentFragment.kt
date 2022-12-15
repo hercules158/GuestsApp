@@ -54,7 +54,6 @@ class PresentFragment : Fragment() {
         }
         adapter.attachListener(listener)
         observer()
-
         return binding.root
     }
 

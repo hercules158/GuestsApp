@@ -1,11 +1,21 @@
 package com.example.convidados.view.viewholder
 
+import android.content.Context
 import android.content.DialogInterface
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.provider.CalendarContract.Colors
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.convidados.R
+import com.example.convidados.constants.ColorsConstants
+import com.example.convidados.constants.DataBaseConstants
 import com.example.convidados.databinding.RowGuestBinding
 import com.example.convidados.model.GuestModel
 import com.example.convidados.view.listener.OnGuestListener
+import kotlin.coroutines.coroutineContext
 
 class GuestViewHolder(private val bind: RowGuestBinding, private val listener: OnGuestListener) :
     RecyclerView.ViewHolder(bind.root) {
@@ -13,7 +23,12 @@ class GuestViewHolder(private val bind: RowGuestBinding, private val listener: O
     fun bind(guest: GuestModel) {
         bind.textName.text = guest.name
 
-        bind.textName.setOnClickListener {
+        if (!guest.presence){
+            bind.textName.setTextColor(Color.parseColor(ColorsConstants.COLOR.RED))
+        } else {
+            bind.textName.setTextColor(Color.parseColor(ColorsConstants.COLOR.BLACK))
+        }
+        bind.textName.setOnClickListener { 
             listener.onClick(guest.id)
         }
 

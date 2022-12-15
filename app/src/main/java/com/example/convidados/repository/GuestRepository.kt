@@ -30,8 +30,7 @@ class GuestRepository(context: Context) {
             val db = guestDataBase.writableDatabase
             val presence = if (guest.presence) 1 else 0
 
-            val values =
-                ContentValues() //Essa classe é usada para armazenar um conjunto de valores que
+            val values = ContentValues() //Essa classe é usada para armazenar um conjunto de valores que
             // o ContentResolver pode processar. Assim podemos utilizar os métodos da classe ContentValues
             values.put(DataBaseConstants.COLUMNS.PRESENCE, presence)
             values.put(DataBaseConstants.COLUMNS.NAME, guest.name)
