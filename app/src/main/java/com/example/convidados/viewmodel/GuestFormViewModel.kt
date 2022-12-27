@@ -14,7 +14,7 @@ class GuestFormViewModel(application: Application) : AndroidViewModel(applicatio
     //contexto veio lá do GuestDataBase que pede um contexto e todos que estavam antes precisaram
     //começar a passar esse contexto até chegar no GuestRepository
 
-    private val repository = GuestRepository.getInstance(application)
+    private val repository = GuestRepository(application)
     private val guestModel = MutableLiveData<GuestModel>()
     val guest: LiveData<GuestModel> = guestModel
 
